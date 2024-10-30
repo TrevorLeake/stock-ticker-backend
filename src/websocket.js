@@ -1,5 +1,4 @@
 
-var WebSocketServer = require('websocket').server;
 var express = require('express');
 
 

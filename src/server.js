@@ -1,42 +1,15 @@
-/*
-  Websocket server with express.js
-  (https://www.npmjs.com/package/express) and ws.js
-  (https://www.npmjs.com/package/ws)
-  Serves an index page from /public. That page makes
-  a websocket client back to this server.
-
-  created 17 Jan 2021
-  modified 23 Feb 2023
-  by Tom Igoe
-*/
-// include express, http, and ws libraries:
-var fs = require('fs');
-const express = require("express");
+const fs = require('fs');
+const express = require('express');
 const fetch = require('node-fetch');
-// the const {} syntax is called destructuring.
-// it allows you to pull just the one function 
-// you need from the libraries below without 
-// making an instance of the whole library:
-const {createServer} = require("http");
-const {WebSocketServer} = require("ws");
-const {URLSearchParams} = require('url');
+const { createServer } = require('http');
+const { WebSocketServer } = require('ws');
+const { URLSearchParams } = require('url');
 
-// make an instance of express:
 const app = express();
-// serve static content from the project's public folder:
-app.use(express.static("public"));
-// make an instance of http server using express instance:
 const server = createServer(app);
-// WebSocketServer needs the http server instance:
 const wss = new WebSocketServer({ server });
-// list of client connections:
-var clients = new Array();
+const clients = []
 
-// this runs after the http server successfully starts:
-function serverStart() {
-  var port = this.address().port;
-  console.log("Server listening on port " + port);
-}
 
 // this handles websocket connections:
 function handleClient(thisClient, request) {
@@ -130,7 +103,11 @@ function handleClient(thisClient, request) {
   
 }
 
-// start the server:
-server.listen(process.env.PORT || 433, serverStart);
-// start the websocket server listening for clients:
+
+function serverStart() {
+  var port = this.address().port;
+  console.log("Stock websocket server listening on port " + port);
+}
+
+server.listen(433, serverStart);
 wss.on("connection", handleClient);

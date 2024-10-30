@@ -1,4 +1,3 @@
-const API_KEY = '19Y3HjuTP1BKGOc_t7uUiO6t8XH5T3uc'
 
 
 var WebSocketServer = require('websocket').server;
