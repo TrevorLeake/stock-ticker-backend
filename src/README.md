@@ -1,4 +1,0 @@
-npm i
-
-node
-sqlite
