@@ -6,10 +6,7 @@
   "scripts": {
     "init-db": "cat ./src/sql/table-create.sql | sqlite3 app.db",
     "seed-db": "cat ./src/sql/table-seed.sql | sqlite3 app.db",
-    "start-ok": "node ./src/server.js",
-    "start": "node ./src/stock.js",
-    "set-env": "export $(cat .env | grep \"^[^#;]\" |xargs)",
-    "start-ws": "node ./src/websocket.js",
+    "start": "export $(cat .env | grep \"^[^#;]\" |xargs) && node ./src/server.js",
     "test": "jest",
     "test-ws": "jest ./src/test/ws.test.js"
   },
